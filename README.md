@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # My Colab Project
 
 
@@ -162,3 +163,6 @@ Upon execution, you will observe:
 *   Standard `setuptools` output indicating package installation steps.
 *   A `[SECURITY ALERT]: Attempting to execute post-install hook...` message.
 *   A detailed `[SECURITY ALERT]: Captured Reconnaissance Data Log` containing the output of all the executed system commands, demonstrating the successful arbitrary code execution, system information gathering, and simulated data exfiltration within the runtime environment.
+=======
+
+>>>>>>> 67abd47ba0035fa21f5546047d3e10736ad67752
