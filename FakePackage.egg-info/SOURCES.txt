@@ -1,6 +1,0 @@
-README.md
-FakePackage.egg-info/PKG-INFO
-FakePackage.egg-info/SOURCES.txt
-FakePackage.egg-info/dependency_links.txt
-FakePackage.egg-info/requires.txt
-FakePackage.egg-info/top_level.txt
