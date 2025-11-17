@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: FakePackage
+Version: 2.1.0
+Summary: A normal, non-suspicious utility package for data handling.
+Home-page: https://github.com/FakeOrg/FakePackage
+Author: John Doe
+Author-email: johndoe@example.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Requires-Dist: requests>=2.25.1
+Requires-Dist: attrs>=21.4.0
+
+A comprehensive package for handling various data formats in Python.
