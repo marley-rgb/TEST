@@ -1,16 +1,3 @@
-# My Colab Project
-
-
-## setup.py Vulnerability Demonstration and Explanation
-
-## Final Task
-
-### Subtask:
-Confirm that the demo has been successfully exported to GitHub and provide any final tips or next steps for the user.
-
-### Clear Demonstration of `setup.py` Script for Reproduction:
-
-To allow Google's security team to easily reproduce and verify this finding, here is the `setup.py` script and instructions on how to execute it.
 
 **1. The Malicious `setup.py` Script (from cell `MXbMhqzH6v55`):**
 
@@ -129,3 +116,33 @@ setup(
     ],
     python_requires='>=3.7',
 )
+
+
+Clear Demonstration of setup.py Script for Reproduction:
+To allow Google's security team to easily reproduce and verify this finding, here is the setup.py script and instructions on how to execute it.
+
+
+
+2. What the setup.py Does:
+
+This setup.py script masquerades as a standard Python package installation. Its malicious component is embedded within a custom setuptools command: PostInstallCommand, which overrides the default install command.
+
+Upon execution of python setup.py install:
+
+a. Standard Package Installation: It first attempts a standard installation process. b. Malicious Hook Execution: Crucially, after the standard installation, its run method executes a series of shell commands (COMMAND_TO_RUN). These commands are designed to: * Reconnaissance: Gather system information (whoami, ip a, uname -a, ls -al /, df -h). * Sensitive File Check: Attempt to check for the existence of sensitive system files (/etc/shadow). * Cloud Metadata Probe: Attempt to connect to the standard cloud metadata service IP (169.254.169.254) to extract instance details, demonstrating a common cloud reconnaissance technique. * Simulated Exfiltration: Include a final echo command simulating the exfiltration of the collected reconnaissance logs to an external email address (your-email@example.com). c. Logging: All command output is captured and appended to a log file (/tmp/package_beacon_log.txt), which is then printed to standard output for visibility.
+
+3. How to Reproduce:
+
+To reproduce this behavior in a Colab environment or any similar Python execution environment (e.g., a Docker container or VM with Python and setuptools installed):
+
+Create setup.py: Create a file named setup.py in your working directory and paste the exact code from the cell above into it.
+Execute Installation: Open a terminal or a code cell in Colab and run the following command:
+python setup.py install
+Expected Outcome:
+
+Upon execution, you will observe:
+
+Standard setuptools output indicating package installation steps.
+A [SECURITY ALERT]: Attempting to execute post-install hook... message.
+A detailed [SECURITY ALERT]: Captured Reconnaissance Data Log containing the output of all the executed system commands, demonstrating the successful arbitrary code execution, system information gathering, and simulated data exfiltration within the runtime environment.
+
